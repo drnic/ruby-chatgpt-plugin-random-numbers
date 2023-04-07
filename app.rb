@@ -1,10 +1,10 @@
-require 'sinatra'
-require 'json'
+require "sinatra"
+require "json"
 
 # Serve files from the .well-known folder
-get '/.well-known/*' do
+get "/.well-known/*" do
   filename = params[:splat].first
-  file_path = File.join(settings.root, '.well-known', filename)
+  file_path = File.join(settings.root, ".well-known", filename)
 
   if File.exist?(file_path)
     send_file file_path
@@ -14,25 +14,24 @@ get '/.well-known/*' do
   end
 end
 
-post '/random' do
+post "/random" do
   content_type :json
 
   begin
     request_data = JSON.parse(request.body.read)
 
-    min = request_data['min'] || 0
-    max = request_data['max'] || 100
+    min = request_data["min"] || 0
+    max = request_data["max"] || 100
 
     if min > max
       status 400
-      { message: 'Invalid range: min cannot be greater than max' }.to_json
+      {message: "Invalid range: min cannot be greater than max"}.to_json
     else
       random_number = rand(min..max)
-      { random_number: random_number }.to_json
+      {random_number: random_number}.to_json
     end
-
-  rescue JSON::ParserError => e
+  rescue JSON::ParserError
     status 400
-    { message: 'Invalid JSON: Please provide a valid JSON object with min and max properties' }.to_json
+    {message: "Invalid JSON: Please provide a valid JSON object with min and max properties"}.to_json
   end
 end
