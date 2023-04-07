@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: Random Number Service
+  description: A simple API service that returns a single random integer.
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/v1
+paths:
+  /random:
+    post:
+      summary: Generate a random integer
+      description: This endpoint generates a single random integer.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                min:
+                  type: integer
+                  description: The minimum value of the random number (inclusive).
+                  default: 0
+                max:
+                  type: integer
+                  description: The maximum value of the random number (inclusive).
+                  default: 100
+              required:
+                - min
+                - max
+      responses:
+        '200':
+          description: A single random integer
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  random_number:
+                    type: integer
+                    description: A randomly generated integer between min and max (inclusive).
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: An error message describing the issue with the request.
+
