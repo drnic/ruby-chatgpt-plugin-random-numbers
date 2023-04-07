@@ -1,6 +1,28 @@
 require "sinatra"
 require "json"
 
+domain = ENV.fetch("DOMAIN")
+
+get "/.well-known/ai-plugin.json" do
+  content_type "application/json"
+
+  file_path = File.join(settings.root, ".well-known", "ai-plugin.json")
+  # Load file, replace domain, and send it back
+  file = File.read(file_path)
+  file.gsub!(/DOMAIN/, domain)
+  file
+end
+
+get "/.well-known/openapi.yaml" do
+  content_type "application/yaml"
+
+  file_path = File.join(settings.root, ".well-known", "openapi.yaml")
+  # Load file, replace domain, and send it back
+  file = File.read(file_path)
+  file.gsub!(/DOMAIN/, domain)
+  file
+end
+
 # Serve files from the .well-known folder
 get "/.well-known/*" do
   filename = params[:splat].first

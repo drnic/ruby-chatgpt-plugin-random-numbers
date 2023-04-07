@@ -4,7 +4,7 @@ info:
   description: A simple API service that returns a single random integer.
   version: 1.0.0
 servers:
-  - url: https://chatgpt-random.au.ngrok.io
+  - url: https://DOMAIN
 paths:
   /random:
     post:
