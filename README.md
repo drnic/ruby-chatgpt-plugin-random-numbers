@@ -14,6 +14,13 @@ This Ruby/Sinatra app is a ChatGPT plugin that provides a random number.
 
 ## Run locally and test on ChatGPT
 
+To start up the application and bind to port 9292:
+
+```plain
+bundle
+rerun rackup
+```
+
 You will need to expose the application to the internet. I use <https://ngrok.com/>.
 
 ```plain
@@ -28,12 +35,7 @@ Region                        Australia (au)
 Forwarding                    https://e92baeb18b8a.ngrok.app -> http://localhost:9292
 ```
 
-Pass the ngrok domain `e92baeb18b8a.ngrok.app` into the sinatra app as `$DOMAIN`.
-
-```plain
-bundle
-DOMAIN=e92baeb18b8a.ngrok.app rerun rackup
-```
+The domain `e92baeb18b8a.ngrok.app` will be passed to ChatGPT when we register the plugin.
 
 ## Register plugin with ChatGPT
 

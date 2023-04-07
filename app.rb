@@ -1,10 +1,10 @@
 require "sinatra"
 require "json"
 
-domain = ENV.fetch("DOMAIN")
-
 get "/.well-known/ai-plugin.json" do
   content_type "application/json"
+
+  domain = request.host
 
   file_path = File.join(settings.root, ".well-known", "ai-plugin.json")
   # Load file, replace domain, and send it back
@@ -15,6 +15,8 @@ end
 
 get "/.well-known/openapi.yaml" do
   content_type "application/yaml"
+
+  domain = request.host
 
   file_path = File.join(settings.root, ".well-known", "openapi.yaml")
   # Load file, replace domain, and send it back
