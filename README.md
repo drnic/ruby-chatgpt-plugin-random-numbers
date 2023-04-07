@@ -12,6 +12,8 @@ This Ruby/Sinatra app is a ChatGPT plugin that provides a random number.
 
 ![demo4](docs/demo4.png)
 
+![demo5](docs/demo5.png)
+
 ## Run locally and test on ChatGPT
 
 To start up the application and bind to port 9292:
