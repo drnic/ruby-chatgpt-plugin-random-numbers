@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_model": "random",
+  "name_for_human": "Random Plugin",
+  "description_for_model": "Plugin for generating a random number.",
+  "description_for_human": "Generate random numbers",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://chatgpt-random.au.ngrok.io/.well-known/openapi.yaml",
+    "has_user_authentication": false
+  },
+  "logo_url": "https://chatgpt-random.au.ngrok.io/.well-known/logo.png",
+  "contact_email": "drnic@mocra.com",
+  "legal_info_url": "http://mocra.com/legal-info"
+}

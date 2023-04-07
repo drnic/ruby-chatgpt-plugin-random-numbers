@@ -4,12 +4,13 @@ info:
   description: A simple API service that returns a single random integer.
   version: 1.0.0
 servers:
-  - url: https://api.example.com/v1
+  - url: https://chatgpt-random.au.ngrok.io
 paths:
   /random:
     post:
-      summary: Generate a random integer
+      summary: Query
       description: This endpoint generates a single random integer.
+      operationId: query_query_post
       requestBody:
         required: true
         content:
@@ -49,4 +50,3 @@ paths:
                   message:
                     type: string
                     description: An error message describing the issue with the request.
-
