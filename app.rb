@@ -42,6 +42,12 @@ post "/random" do
   begin
     request_data = JSON.parse(request.body.read)
 
+    # pp request_data
+    # pp request.env
+    # HTTP_OPENAI_CONVERSATION_ID
+    # HTTP_OPENAI_EPHEMERAL_USER_ID
+    puts "HTTP_OPENAI_SUBDIVISION_1_ISO_CODE: #{request.env["HTTP_OPENAI_SUBDIVISION_1_ISO_CODE"]}"
+
     min = request_data["min"] || 0
     max = request_data["max"] || 100
 
