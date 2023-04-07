@@ -67,3 +67,49 @@ Try the prompts:
 * Or the other examples above
 
 ![testing-example-prompts](docs/testing-example-prompts.png)
+
+## Implementation
+
+The Sinatra app provides a `POST /random` endpoint that returns `{random_number: 35}` or similar.
+
+```plain
+export DOMAIN=e92baeb18b8a.ngrok.app
+curl "https://$DOMAIN/random" -d '{}'
+```
+
+You can also pass `min` or `max` to override the defaults of 0 and 100 respectively.
+
+```plain
+$ curl "https://$DOMAIN/random" -d '{"min":10,"max":20}'
+{"random_number":15}
+```
+
+But ChatGPT Plugins doesn't know the details of this API until we tell it. When you register ChatGPT it fetches two files from our plugin.
+
+The high-level plugin definition:
+
+```plain
+curl "https://$DOMAIN/.well-known/ai-plugin.json"
+```
+
+And the description of our `POST /random` endpoint:
+
+```plain
+curl "https://$DOMAIN/.well-known/openapi.yaml"
+```
+
+The source files are within this repo's `.well-known` folder, but our `app.rb` sinatra script loads them, replaces `DOMAIN` with our `$DOMAIN` ngrok domain, and returns the modified file.
+
+## Writing your own openapi.yaml file
+
+I actually asked GPT-4 to write my file:
+
+> Create an openapi.yaml for a service that has a POST /random endpoint that returns single integer which is a random number
+
+Through debugging, I needed to manually change the result a little bit to add `operationId: query_query_post` to my `/random` `paths` entry.
+
+And then I asked GPT-4 to write the initial Sinatra app:
+
+> Create a ruby sinatra app.rb that implements this endpoint
+
+And I was half way there. Good times.
